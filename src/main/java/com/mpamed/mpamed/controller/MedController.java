@@ -2,6 +2,7 @@ package com.mpamed.mpamed.controller;
 
 import com.mpamed.mpamed.models.Medicine;
 import com.mpamed.mpamed.handler.Handler;
+import com.mpamed.mpamed.models.MedicineDTO;
 import io.swagger.annotations.*;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ public class MedController {
 
     @ApiOperation(value = "Получить препарат по идентификатору.", response = Medicine.class)
     @GetMapping("/getmedicinebyid")
-    public Medicine getMedicineById(@ApiParam(value = "Идентификатор препарата.", required = true) @RequestParam(value = "id", required = true) String id) {
+    public MedicineDTO getMedicineById(@ApiParam(value = "Идентификатор препарата.", required = true) @RequestParam(value = "id", required = true) String id) {
         return medicineHandler.getMedicineById(id);
     }
 

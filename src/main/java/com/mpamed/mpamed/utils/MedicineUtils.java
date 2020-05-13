@@ -1,5 +1,7 @@
 package com.mpamed.mpamed.utils;
 
+import com.mpamed.mpamed.models.Contraindications;
+import com.mpamed.mpamed.models.MNN;
 import com.mpamed.mpamed.models.Medicine;
 
 import java.util.List;
@@ -27,7 +29,7 @@ public class MedicineUtils {
 
     public static Medicine generateMedicineWithSpecifiedId(String id) {
         Medicine medicine = generateRandomMedicine();
-        medicine.setId(Integer.valueOf(id));
+        medicine.setId(id);
         return medicine;
     }
 
@@ -48,7 +50,9 @@ public class MedicineUtils {
     }
 
     private static Medicine getMedicine(int id, String name, List<String> contraindications, boolean forReceipt, List<String> mnn) {
-        return new Medicine(id, name, contraindications, forReceipt, mnn);
+        List<Contraindications> collectContraindications = contraindications.stream().map(contraindication -> new Contraindications( contraindication)).collect(Collectors.toList());
+        List<com.mpamed.mpamed.models.MNN> collectMnn = mnn.stream().map(oneMnn -> new MNN( oneMnn)).collect(Collectors.toList());
+        return new Medicine( name, collectContraindications, forReceipt, collectMnn);
     }
 
     private static List<String> generateRandomContraindications() {
