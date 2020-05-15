@@ -3,13 +3,11 @@ package com.mpamed.mpamed.models;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 
+@NoArgsConstructor
 @RequiredArgsConstructor
 @Getter
 @Setter

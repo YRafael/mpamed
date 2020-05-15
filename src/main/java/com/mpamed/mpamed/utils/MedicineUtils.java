@@ -29,7 +29,7 @@ public class MedicineUtils {
 
     public static Medicine generateMedicineWithSpecifiedId(String id) {
         Medicine medicine = generateRandomMedicine();
-        medicine.setId(id);
+        medicine.setId(Integer.valueOf(id));
         return medicine;
     }
 

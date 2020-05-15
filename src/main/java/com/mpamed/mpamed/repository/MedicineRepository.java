@@ -14,10 +14,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 @Component
@@ -36,19 +35,19 @@ public class MedicineRepository implements IMedicineRepository {
     }
 
     @Override
-    public Medicine findByName(String name) {
+    public Medicine[] findByName(String name) {
         return postgreRepo.findByName(name);
     }
 
     @Override
     public void save(MedicineDTO medicine) {
-        List<Contraindications> contraindicationsList = medicine.getContraindications().stream().map(Contraindications::new).collect(Collectors.toList());
+        List<Contraindications> contraindicationsList = medicine.getContraindications().stream().map((Object s) -> {return new Contraindications((String)((Map)s).get("full_name"));}).collect(Collectors.toList());
         mongoRepo.save(medicine);
         postgreRepo.save(new Medicine(
-                medicine.getId(),
+                medicine.getName(),
                 contraindicationsList,
                 medicine.isForReceipt(),
-                medicine.getMnn().stream().map(MNN::new).collect(Collectors.toList())
+                medicine.getMnn().stream().map((Object s) -> {return new MNN((String)((Map)s).get("full_name"));}).collect(Collectors.toList())
         ));
     }
 
@@ -66,6 +65,7 @@ public class MedicineRepository implements IMedicineRepository {
 
     @Override
     public Medicine[] getAllContraindications(String id) {
-        return postgreRepo.findByIdMedRefContraindications(id);
+        //return postgreRepo.findByIdMedRefContraindications(id);
+        return MedicineUtils.generateArrayOfMedicine();
     }
 }

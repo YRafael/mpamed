@@ -8,7 +8,7 @@ import java.util.Map;
 public interface Handler {
     MedicineDTO getMedicineById(String id);
 
-    Medicine getMedicineByName(String name);
+    Medicine[] getMedicineByName(String name);
 
     Medicine[] getAllMedicine();
 

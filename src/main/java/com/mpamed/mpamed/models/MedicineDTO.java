@@ -19,7 +19,7 @@ import java.util.Map;
 public class MedicineDTO {
 
     public MedicineDTO(Map<String, Object> otherProps) {
-        this.id = (String) otherProps.remove("id");
+        this.id = String.valueOf(otherProps.remove("id"));
         this.name = (String) otherProps.remove("name");
         this.contraindications = (List<String>) otherProps.remove("contraindications");
         this.forReceipt = (boolean) otherProps.remove("forReceipt");

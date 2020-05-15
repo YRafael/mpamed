@@ -27,7 +27,7 @@ public class MedController {
 
     @ApiOperation(value = "Получить препарат по имени.", response = Medicine.class)
     @GetMapping("/getmedicinebyname")
-    public Medicine getMedicineByName(@ApiParam(value = "Имя препарата.", required = true) @RequestParam(value = "name", required = true) String name) {
+    public Medicine[] getMedicineByName(@ApiParam(value = "Имя препарата.", required = true) @RequestParam(value = "name", required = true) String name) {
         return medicineHandler.getMedicineByName(name);
     }
 

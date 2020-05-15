@@ -29,7 +29,7 @@ public class MedicineHandler implements Handler {
     }
 
     @Override
-    public Medicine getMedicineByName(String name)
+    public Medicine[] getMedicineByName(String name)
     {
         return medicineRepository.findByName(name);
     }

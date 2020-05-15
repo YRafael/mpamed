@@ -2,15 +2,12 @@ package com.mpamed.mpamed.models;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Getter;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
 
-
+@NoArgsConstructor
 @RequiredArgsConstructor
 @Getter
 @Setter
@@ -22,7 +19,7 @@ public class Medicine {
     @ApiModelProperty(notes = "Сгенерированный базой данных ID.")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private int id;
 
     @NonNull
     @ApiModelProperty(notes = "Наименования препарата.")
@@ -31,11 +28,11 @@ public class Medicine {
 
     @NonNull
     @ApiModelProperty(notes = "Противопоказания.")
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "MedRefContraindications",
-            joinColumns = @JoinColumn(name = "idMed"),
-            inverseJoinColumns = @JoinColumn(name = "idContraindications")
+            joinColumns = @JoinColumn(name = "idContraindications"),
+            inverseJoinColumns = @JoinColumn(name = "idMed")
     )
     private List<Contraindications> contraindications;
 
@@ -46,11 +43,11 @@ public class Medicine {
 
     @NonNull
     @ApiModelProperty(notes = "Действующие вещества.")
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "MedRefMNN",
-            joinColumns = @JoinColumn(name = "idMed"),
-            inverseJoinColumns = @JoinColumn(name = "idMNN")
+            joinColumns = @JoinColumn(name = "idMNN"),
+            inverseJoinColumns = @JoinColumn(name = "idMed")
     )
     private List<MNN> mnn;
 

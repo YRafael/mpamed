@@ -7,6 +7,6 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.Optional;
 
 public interface PostgreRepo extends CrudRepository<Medicine, String>, PagingAndSortingRepository<Medicine, String> {
-    Medicine findByName(String name);
-    Medicine[] findByIdMedRefContraindications(String id);
+    Medicine[] findByName(String name);
+    //Medicine[] findByIdMedRefContraindications(String id);
 }
